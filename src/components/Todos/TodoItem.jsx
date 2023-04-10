@@ -1,7 +1,8 @@
-const TodoItem = ({ id, title, completed, onToggle }) => {
-  const handleToggle = () => {
-    onToggle(id);
-  };
+import { useDispatch } from 'react-redux';
+import { deleteTodos, toggleTodos } from '../../features/todos/todosSlice';
+
+const TodoItem = ({ id, title, completed }) => {
+  const dispatch = useDispatch();
 
   return (
     <li
@@ -19,7 +20,7 @@ const TodoItem = ({ id, title, completed, onToggle }) => {
             name={title}
             id={id}
             checked={completed}
-            onChange={handleToggle}
+            onChange={(e) => dispatch(toggleTodos({ id }))}
           ></input>
           <label htmlFor={id} name={title}>
             {title}
@@ -27,6 +28,7 @@ const TodoItem = ({ id, title, completed, onToggle }) => {
         </div>
         <button
           type='button'
+          onClick={() => dispatch(deleteTodos({ id }))}
           className='focus:outline-none text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'
         >
           Delete
