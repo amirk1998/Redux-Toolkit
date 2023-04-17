@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAsyncTodos } from '../../features/todos/todosSlice';
+import { getAsyncTodos } from '../../features/Todos/TodosSlice';
 
 const TodoList = () => {
   const { todos, error, loading } = useSelector((state) => state.todos);
@@ -27,7 +27,7 @@ const TodoList = () => {
 
   return (
     <div className=' w-full flex flex-col items-center justify-center my-4 '>
-      <ul className='w-1/2 px-2 pb-2 text-lg font-medium text-gray-900 border-2 rounded-lg border-slate-500  dark:bg-gray-700 dark:border-gray-600 dark:text-white overscroll-y-auto overflow-x-hidden h-[380px] overflow-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100'>
+      <ul className='w-1/2 pb-2 text-lg font-medium text-gray-900 border-2 rounded-lg border-slate-500  dark:bg-gray-700 dark:border-gray-600 dark:text-white overscroll-y-auto overflow-x-hidden h-[380px] overflow-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100'>
         {todos.map((todo) => {
           return (
             <TodoItem
@@ -35,7 +35,6 @@ const TodoList = () => {
               id={todo.id}
               title={todo.title}
               completed={todo.completed}
-              // onToggle={handleToggle}
             />
           );
         })}
