@@ -1,19 +1,19 @@
 {
   "todos": [
     {
+      "id": 1,
       "title": "delectus aut autem",
-      "completed": true,
-      "id": 1
+      "completed": false
     },
     {
+      "id": 2,
       "title": "quis ut nam facilis et officia qui",
-      "completed": true,
-      "id": 2
+      "completed": false
     },
     {
+      "id": 3,
       "title": "fugiat veniam minus",
-      "completed": false,
-      "id": 3
+      "completed": false
     },
     {
       "id": 4,
@@ -21,9 +21,9 @@
       "completed": true
     },
     {
+      "id": 5,
       "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-      "completed": false,
-      "id": 5
+      "completed": false
     },
     {
       "id": 6,
@@ -114,11 +114,6 @@
       "title": "test 2",
       "completed": false,
       "id": 23
-    },
-    {
-      "title": "test 5",
-      "completed": false,
-      "id": 24
     }
   ]
 }

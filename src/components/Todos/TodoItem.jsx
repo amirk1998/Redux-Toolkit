@@ -1,13 +1,20 @@
 import { useDispatch } from 'react-redux';
-import { deleteTodos, toggleTodos } from '../../features/Todos/TodosSlice';
+import { deleteTodos, toggleAsyncTodos } from '../../features/Todos/TodosSlice';
+import { useState } from 'react';
 
 const TodoItem = ({ id, title, completed }) => {
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState(completed);
+
+  const handleCheckboxChange = () => {
+    dispatch(toggleAsyncTodos({ id, title, completed: !isChecked }));
+    setIsChecked(!isChecked);
+  };
 
   return (
     <li
       className={
-        completed
+        isChecked
           ? 'bg-green-200 border-b-2 border-slate-500'
           : ' border-b-2 border-slate-500'
       }
@@ -19,8 +26,8 @@ const TodoItem = ({ id, title, completed }) => {
             className='w-4 h-4 mr-2 text-blue-600 bg-gray-100 border-gray-300 rounded outline-none focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             name={title}
             id={id}
-            checked={completed}
-            onChange={(e) => dispatch(toggleTodos({ id }))}
+            checked={isChecked}
+            onChange={handleCheckboxChange}
           ></input>
           <label htmlFor={id} name={title}>
             {title}
