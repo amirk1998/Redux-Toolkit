@@ -8,11 +8,11 @@ export const getAsyncTodos = createAsyncThunk(
     try {
       const response = await axios.get(
         // 'http://localhost:3001/todos?_sort=id&_order=desc'
-        'http://localhost:3001/todos/'
+        'http://localhost:3001/todosddsfdfds/'
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue([], error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -50,23 +50,17 @@ export const toggleAsyncTodos = createAsyncThunk(
   }
 );
 
-// export const addAsyncTodos = createAsyncThunk(
-//   'todos/addAsyncTodos',
-//   async (payload, { rejectWithValue, getState }) => {
-//     try {
-//       const response = await axios.post('http://localhost:3001/todos', {
-//         title: payload.title,
-//         completed: false,
-//       });
-//       const currentState = getState();
-//       const newTodo = response.data;
-//       const updatedTodos = [newTodo, ...currentState.todos];
-//       return updatedTodos;
-//     } catch (error) {
-//       return rejectWithValue([], error);
-//     }
-//   }
-// );
+export const deleteAsyncTodos = createAsyncThunk(
+  'todos/deleteAsyncTodos',
+  async (payload, { rejectWithValue }) => {
+    try {
+      await axios.delete(`http://localhost:3001/todos/${payload.id}`);
+      return { id: payload.id };
+    } catch (error) {
+      return rejectWithValue([], error);
+    }
+  }
+);
 
 const initialState = {
   todos: [],
@@ -111,19 +105,21 @@ const todosSlice = createSlice({
       return {
         ...state,
         todos: [],
-        error: action.error.message,
         loading: false,
+        error: action.payload.message,
       };
     },
     [addAsyncTodos.fulfilled]: (state, action) => {
       state.todos.push(action.payload);
     },
-
     [toggleAsyncTodos.fulfilled]: (state, action) => {
       const selectedTodo = state.todos.find(
         (item) => item.id === action.payload.id
       );
       selectedTodo.completed = action.payload.completed;
+    },
+    [deleteAsyncTodos.fulfilled]: (state, action) => {
+      state.todos = state.todos.filter((item) => item.id !== action.payload.id);
     },
   },
 });

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAsyncTodos } from '../../features/Todos/TodosSlice';
+import {
+  deleteAsyncTodos,
+  getAsyncTodos,
+} from '../../features/Todos/TodosSlice';
 
 const TodoList = () => {
   const { todos, error, loading } = useSelector((state) => state.todos);
@@ -10,6 +13,10 @@ const TodoList = () => {
   useEffect(() => {
     dispatch(getAsyncTodos());
   }, []);
+
+  const handleDelete = (id) => {
+    dispatch(deleteAsyncTodos({ id }));
+  };
 
   if (loading)
     return (
