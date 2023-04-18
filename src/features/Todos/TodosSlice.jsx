@@ -8,7 +8,7 @@ export const getAsyncTodos = createAsyncThunk(
     try {
       const response = await axios.get(
         // 'http://localhost:3001/todos?_sort=id&_order=desc'
-        'http://localhost:3001/todosddsfdfds/'
+        'http://localhost:3001/todos/'
       );
       return response.data;
     } catch (error) {
